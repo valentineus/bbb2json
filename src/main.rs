@@ -6,6 +6,6 @@ use parser::*;
 
 fn main() {
 	let file: File = File::open("events.xml").unwrap();
-	let data: ParserResult = qwerty(BufReader::new(file));
+	let data: ParserResult = parse(BufReader::new(file));
 	dbg!(data.meeting_name);
 }
