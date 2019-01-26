@@ -5,6 +5,9 @@ use std::path::Path;
 extern crate clap;
 use clap::{load_yaml, App};
 
+extern crate rustc_serialize;
+use rustc_serialize::json;
+
 mod parser;
 use parser::*;
 
@@ -18,6 +21,7 @@ fn main() {
 		true => {
 			let file: File = File::open(path).unwrap();
 			let data: ParserResult = parse(BufReader::new(file));
+			println!("{}", json::as_pretty_json(&data));
 		}
 		_ => panic!("Error File!"),
 	};
