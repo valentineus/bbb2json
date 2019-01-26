@@ -1,7 +1,7 @@
-extern crate xml;
-
 use std::fs::File;
 use std::io::BufReader;
+
+extern crate xml;
 use xml::reader::{EventReader, XmlEvent};
 
 pub struct ParserResult {
