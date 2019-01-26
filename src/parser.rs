@@ -10,7 +10,7 @@ pub struct ParserResult {
 	pub meeting_name: String,
 }
 
-pub fn qwerty(content: BufReader<File>) -> ParserResult {
+pub fn parse(content: BufReader<File>) -> ParserResult {
 	let parser = EventReader::new(content);
 
 	let mut data = ParserResult {
