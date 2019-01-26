@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::BufReader;
+use std::path::Path;
 
 extern crate clap;
 use clap::{load_yaml, App};
@@ -13,7 +14,11 @@ fn main() {
 
 	let path = matches.value_of("FILE").unwrap();
 
-	let file: File = File::open(path).unwrap();
-	let data: ParserResult = parse(BufReader::new(file));
-	dbg!(data.meeting_name);
+	match Path::new(path).exists() {
+		true => {
+			let file: File = File::open(path).unwrap();
+			let data: ParserResult = parse(BufReader::new(file));
+		}
+		_ => panic!("Error File!"),
+	};
 }
