@@ -2,3 +2,9 @@ name: "bbb2json"
 version: "0.0.1"
 author: "Valentin Popov <info@valentineus.link>"
 about: "Анализатор записей BigBlueButton."
+
+args:
+    - FILE:
+        help: "Путь к анализируемому файлу"
+        index: 1
+        required: true
