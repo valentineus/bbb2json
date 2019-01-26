@@ -13,9 +13,9 @@ use xml::reader::{EventReader, XmlEvent};
 
 #[derive(Serialize, Clone)]
 struct Record {
-	externalId: String,
-	meetingId: String,
-	meetingName: String,
+	external_id: String,
+	meeting_id: String,
+	meeting_name: String,
 }
 
 fn main() {
@@ -25,9 +25,9 @@ fn main() {
 	let parser = EventReader::new(file);
 
 	let mut data = Record {
-		externalId: "".to_string(),
-		meetingId: "".to_string(),
-		meetingName: "".to_string(),
+		external_id: "".to_string(),
+		meeting_id: "".to_string(),
+		meeting_name: "".to_string(),
 	};
 
 	for element in parser {
@@ -42,11 +42,11 @@ fn main() {
 					let value: String = attribute.value.to_string();
 
 					if name == "externalId" {
-						data.externalId = value;
+						data.external_id = value;
 					} else if name == "meetingId" {
-						data.meetingId = value;
+						data.meeting_id = value;
 					} else if name == "meetingName" {
-						data.meetingName = value;
+						data.meeting_name = value;
 					}
 				}
 			}
