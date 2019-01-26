@@ -4,6 +4,7 @@ use std::io::BufReader;
 extern crate xml;
 use xml::reader::{EventReader, XmlEvent};
 
+#[derive(RustcEncodable)]
 pub struct ParserResult {
 	pub external_id: String,
 	pub meeting_id: String,
