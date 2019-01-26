@@ -11,7 +11,7 @@ use serde::Serialize;
 use serde_json::Result;
 use xml::reader::{EventReader, XmlEvent};
 
-#[derive(Serialize)]
+#[derive(Serialize, Clone)]
 struct Record {
 	externalId: String,
 	meetingId: String,
@@ -24,32 +24,40 @@ fn main() {
 
 	let parser = EventReader::new(file);
 
-	for e in parser {
-		match e {
+	let mut data = Record {
+		externalId: "".to_string(),
+		meetingId: "".to_string(),
+		meetingName: "".to_string(),
+	};
+
+	for element in parser {
+		match element {
 			Ok(XmlEvent::StartElement {
 				name: _,
 				attributes,
 				..
 			}) => {
-				for a in attributes {
-					let mut data: Record;
+				for attribute in attributes {
+					let name: String = attribute.name.local_name.to_string();
+					let value: String = attribute.value.to_string();
 
-					match a.name.local_name.as_ref() {
-						"externalId" => data.externalId = a.value.to_owned(),
-						"meetingId" => data.meetingId = a.value.to_owned(),
-						"meetingName" => data.meetingName = a.value.to_owned(),
-						_ => {}
-					};
-
-					let j = serde_json::to_string(&data);
-					dbg!(j);
+					if name == "externalId" {
+						data.externalId = value;
+					} else if name == "meetingId" {
+						data.meetingId = value;
+					} else if name == "meetingName" {
+						data.meetingName = value;
+					}
 				}
 			}
-			Err(e) => {
-				dbg!(e);
+			Err(error) => {
+				dbg!(error);
 				break;
 			}
 			_ => {}
 		}
 	}
+
+	let j = serde_json::to_string(&data);
+	dbg!(j);
 }
