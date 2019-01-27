@@ -1,8 +1,8 @@
 [package]
-name = "bbb2json"
-version = "0.1.0"
 authors = [ "Valentin Popov <info@valentineus.link>" ]
 edition = "2018"
+name = "bbb2json"
+version = "0.0.1"
 
 [dependencies]
 clap = { version = "2.32.0", features = [ "yaml" ] }
