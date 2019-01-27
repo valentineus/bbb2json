@@ -31,20 +31,20 @@ pub fn parser(content: BufReader<File>) -> ParserResult {
                     let attr_name: String = attribute.name.local_name.to_string();
                     let attr_value: String = attribute.value.to_string();
 
-                    if el_name == "meeting" && attr_name == "id" {
-                        data.meeting_id = attr_value.clone();
+                    if el_name == "metadata" && attr_name == "bn-recording-status" {
+                        data.context = serde_json::from_str(&attr_value).unwrap();
                     }
 
                     if el_name == "meeting" && attr_name == "externalId" {
                         data.external_id = attr_value.clone();
                     }
 
-                    if el_name == "meeting" && attr_name == "name" {
-                        data.meeting_name = attr_value.clone();
+                    if el_name == "meeting" && attr_name == "id" {
+                        data.meeting_id = attr_value.clone();
                     }
 
-                    if el_name == "metadata" && attr_name == "bn-recording-status" {
-                        data.context = serde_json::from_str(&attr_value).unwrap();
+                    if el_name == "meeting" && attr_name == "name" {
+                        data.meeting_name = attr_value.clone();
                     }
                 }
             }
