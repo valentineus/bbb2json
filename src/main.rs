@@ -24,8 +24,8 @@ fn main() {
 		true => {
 			let file: File = File::open(path).unwrap();
 			let data: ParserResult = parser(BufReader::new(file));
-			println!("{:#?}", serde_json::to_string_pretty(&data));
+			println!("{}", serde_json::to_string_pretty(&data).unwrap());
 		}
-		_ => panic!("File does not exist or is not available."),
+		_ => panic!("File {:#?} does not exist or is not available.", path),
 	};
 }
