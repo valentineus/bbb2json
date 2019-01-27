@@ -37,10 +37,7 @@ pub fn parser(content: BufReader<File>) -> ParserResult {
 					}
 				}
 			}
-			Err(error) => {
-				dbg!(error);
-				break;
-			}
+			Err(error) => panic!(error),
 			_ => {}
 		}
 	}
