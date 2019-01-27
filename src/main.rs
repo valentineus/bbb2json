@@ -15,7 +15,7 @@ mod parser;
 use parser::*;
 
 fn main() {
-	let yaml = load_yaml!("cli/ru.yml");
+	let yaml = load_yaml!("cli/en.yml");
 	let matches = App::from_yaml(yaml).get_matches();
 
 	let path = matches.value_of("FILE").unwrap();
