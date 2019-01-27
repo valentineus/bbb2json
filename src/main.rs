@@ -1,13 +1,15 @@
+#[macro_use]
+extern crate serde_derive;
+extern crate serde_json;
+
+extern crate clap;
+extern crate xml;
+
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
 
-extern crate clap;
 use clap::{load_yaml, App};
-
-#[macro_use]
-extern crate serde_derive;
-extern crate serde_json;
 
 mod parser;
 use parser::*;
