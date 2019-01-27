@@ -26,6 +26,6 @@ fn main() {
 			let data: ParserResult = parser(BufReader::new(file));
 			println!("{:#?}", serde_json::to_string_pretty(&data));
 		}
-		_ => panic!("Error File!"),
+		_ => panic!("File does not exist or is not available."),
 	};
 }
