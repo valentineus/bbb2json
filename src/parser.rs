@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::BufReader;
+
 use xml::reader::{EventReader, XmlEvent};
 
 #[derive(Serialize)]
