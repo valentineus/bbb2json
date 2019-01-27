@@ -1,7 +1,5 @@
 use std::fs::File;
 use std::io::BufReader;
-
-extern crate xml;
 use xml::reader::{EventReader, XmlEvent};
 
 #[derive(Serialize)]
