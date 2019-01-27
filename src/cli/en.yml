@@ -1,5 +1,5 @@
 name: "bbb2json"
-version: "0.0.1"
+version: "0.1.0"
 author: "Valentin Popov <info@valentineus.link>"
 about: "BigBlueButton records analyzer. Displays basic recording information."
 
