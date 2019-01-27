@@ -1,10 +1,10 @@
 name: "bbb2json"
 version: "0.0.1"
 author: "Valentin Popov <info@valentineus.link>"
-about: "Анализатор записей BigBlueButton."
+about: "BigBlueButton records analyzer. Displays basic recording information."
 
 args:
     - FILE:
-        help: "Путь к анализируемому файлу"
+        help: "The path to a file 'events.xml'."
         index: 1
         required: true
