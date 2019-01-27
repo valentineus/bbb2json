@@ -4,23 +4,21 @@ use std::io::BufReader;
 extern crate xml;
 use xml::reader::{EventReader, XmlEvent};
 
-#[derive(RustcEncodable)]
+#[derive(Serialize)]
 pub struct ParserResult {
 	pub external_id: String,
 	pub meeting_id: String,
 	pub meeting_name: String,
 }
 
-pub fn parse(content: BufReader<File>) -> ParserResult {
-	let parser = EventReader::new(content);
-
+pub fn parser(content: BufReader<File>) -> ParserResult {
 	let mut data = ParserResult {
 		external_id: "".to_string(),
 		meeting_id: "".to_string(),
 		meeting_name: "".to_string(),
 	};
 
-	for element in parser {
+	for element in EventReader::new(content) {
 		match element {
 			Ok(XmlEvent::StartElement {
 				name: _,
