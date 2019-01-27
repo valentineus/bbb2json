@@ -5,8 +5,9 @@ use std::path::Path;
 extern crate clap;
 use clap::{load_yaml, App};
 
-extern crate rustc_serialize;
-use rustc_serialize::json;
+#[macro_use]
+extern crate serde_derive;
+extern crate serde_json;
 
 mod parser;
 use parser::*;
@@ -20,8 +21,8 @@ fn main() {
 	match Path::new(path).exists() {
 		true => {
 			let file: File = File::open(path).unwrap();
-			let data: ParserResult = parse(BufReader::new(file));
-			println!("{}", json::as_pretty_json(&data));
+			let data: ParserResult = parser(BufReader::new(file));
+			println!("{:#?}", serde_json::to_string_pretty(&data));
 		}
 		_ => panic!("Error File!"),
 	};
