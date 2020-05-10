@@ -1,31 +1,22 @@
-#[macro_use]
-extern crate serde_derive;
-extern crate serde_json;
+use walkdir::WalkDir;
 
-extern crate clap;
-extern crate xml;
+/// Создание списка "events.xml" файлов.
+fn get_list(root: &str) -> Vec<String> {
+    let mut array: Vec<String> = vec![];
 
-use std::fs::File;
-use std::io::BufReader;
-use std::path::Path;
+    for entry in WalkDir::new(root) {
+        let path = entry.unwrap().path().display().to_string();
 
-use clap::{load_yaml, App};
+        if path.contains("events.xml") {
+            array.push(path);
+        }
+    }
 
-mod parser;
-use parser::*;
+    return array;
+}
 
 fn main() {
-    let yaml = load_yaml!("cli/en.yml");
-    let matches = App::from_yaml(yaml).get_matches();
-
-    let path = matches.value_of("FILE").unwrap();
-
-    match Path::new(path).exists() {
-        true => {
-            let file: File = File::open(path).unwrap();
-            let data: ParserResult = parser(BufReader::new(file));
-            println!("{}", serde_json::to_string_pretty(&data).unwrap());
-        }
-        _ => panic!("File {:#?} does not exist or is not available.", path),
-    };
+    let root = "tests";
+    let list = get_list(root);
+    dbg!(list);
 }
